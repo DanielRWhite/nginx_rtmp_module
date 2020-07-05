@@ -9,6 +9,7 @@
 #include <ngx_md5.h>
 #include <time.h>
 #include <string.h>
+#include <stdio.h>
 #include "ngx_rtmp.h"
 #include "ngx_rtmp_cmd_module.h"
 #include "ngx_rtmp_netcall_module.h"
@@ -991,16 +992,15 @@ ngx_rtmp_notify_set_name(u_char *dst, size_t dst_len, u_char *src,
     size_t src_len)
 {
 
-    time_t clk = time(NULL);
+    time_t clk = (int) time(NULL);
     u_char     result[16], *p;
     ngx_md5_t  md5;
 
-    char *str;
-    str = concat(src, ctime(&clk));
-    size_t str_len = strlen(str);
+    char string[src_len + 10];
+    src = snprintf(string, src_len + 10, "%s%s", src, itoa(ctime(&clk)));
 
     ngx_md5_init(&md5);
-    ngx_md5_update(&md5, str, str_len);
+    ngx_md5_update(&md5, src, src_len + 10);
     ngx_md5_final(result, &md5);
     free(str);
 
