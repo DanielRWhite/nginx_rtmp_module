@@ -993,9 +993,7 @@ static void
 ngx_rtmp_notify_set_name(u_char *dst, size_t dst_len, u_char *src,
     size_t src_len)
 {
-    int t_time = time(NULL);
-    char s_time[10] =
-    sprintf(dst, "\0%s-%s", src, itoa((int) time(NULL)));
+    sprintf(dst, "\0%s-%d", src, (int) time(NULL));
 }
 
 
