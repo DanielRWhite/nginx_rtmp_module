@@ -990,7 +990,7 @@ ngx_rtmp_notify_connect_handle(ngx_rtmp_session_t *s,
 
 
 static void
-ngx_rtmp_notify_set_name(u_char *dst, size_t dst_len, u_char *src,
+ngx_rtmp_notify_set_name(char *dst, size_t dst_len, u_char *src,
     size_t src_len)
 {
     sprintf(dst, "%s-%d", src, (int) time(NULL));
@@ -1007,7 +1007,7 @@ ngx_rtmp_notify_publish_handle(ngx_rtmp_session_t *s,
     ngx_rtmp_relay_target_t     target;
     ngx_url_t                  *u;
     ngx_rtmp_notify_app_conf_t *nacf;
-    u_char                      name[NGX_RTMP_MAX_NAME];
+    char                      name[NGX_RTMP_MAX_NAME];
 
     static ngx_str_t    location = ngx_string("location");
 
@@ -1086,7 +1086,7 @@ ngx_rtmp_notify_play_handle(ngx_rtmp_session_t *s,
     ngx_rtmp_relay_target_t     target;
     ngx_url_t                  *u;
     ngx_rtmp_notify_app_conf_t *nacf;
-    u_char                      name[NGX_RTMP_MAX_NAME];
+    char                      name[NGX_RTMP_MAX_NAME];
 
     static ngx_str_t            location = ngx_string("location");
 
