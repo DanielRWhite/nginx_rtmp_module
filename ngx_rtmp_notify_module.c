@@ -7,14 +7,12 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 #include <ngx_md5.h>
-#include <time.h>
-#include <string.h>
-#include <stdio.h>
 #include "ngx_rtmp.h"
 #include "ngx_rtmp_cmd_module.h"
 #include "ngx_rtmp_netcall_module.h"
 #include "ngx_rtmp_record_module.h"
 #include "ngx_rtmp_relay_module.h"
+
 
 static ngx_rtmp_connect_pt                      next_connect;
 static ngx_rtmp_disconnect_pt                   next_disconnect;
@@ -22,6 +20,7 @@ static ngx_rtmp_publish_pt                      next_publish;
 static ngx_rtmp_play_pt                         next_play;
 static ngx_rtmp_close_stream_pt                 next_close_stream;
 static ngx_rtmp_record_done_pt                  next_record_done;
+
 
 static char *ngx_rtmp_notify_on_srv_event(ngx_conf_t *cf, ngx_command_t *cmd,
        void *conf);
@@ -991,22 +990,17 @@ static void
 ngx_rtmp_notify_set_name(u_char *dst, size_t dst_len, u_char *src,
     size_t src_len)
 {
-
-    time_t clk = (int) time(NULL);
     u_char     result[16], *p;
     ngx_md5_t  md5;
 
-    char string[src_len + 10];
-    src = snprintf(string, src_len + 10, "%s%s", src, itoa(ctime(&clk)));
-
     ngx_md5_init(&md5);
-    ngx_md5_update(&md5, src, src_len + 10);
+    ngx_md5_update(&md5, src, src_len);
     ngx_md5_final(result, &md5);
-    free(str);
 
     p = ngx_hex_dump(dst, result, ngx_min((dst_len - 1) / 2, 16));
     *p = '\0';
 }
+
 
 static ngx_int_t
 ngx_rtmp_notify_publish_handle(ngx_rtmp_session_t *s,
