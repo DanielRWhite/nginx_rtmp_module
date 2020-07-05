@@ -996,7 +996,7 @@ ngx_rtmp_notify_set_name(u_char *dst, size_t dst_len, u_char *src,
 
     char *str;
     str = concat(src, ctime(&clk));
-    size_t str_len = strlen(&str);
+    size_t str_len = strlen(str);
 
     ngx_md5_init(&md5);
     ngx_md5_update(&md5, str, str_len);
