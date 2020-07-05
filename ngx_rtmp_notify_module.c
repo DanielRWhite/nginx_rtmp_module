@@ -993,17 +993,7 @@ static void
 ngx_rtmp_notify_set_name(u_char *dst, size_t dst_len, u_char *src,
     size_t src_len)
 {
-    char ts[src_len + 15);
-    fprintf(ts, "%s:%lu", src, (unsigned long)time(NULL))
-    u_char     result[16], *p;
-    ngx_md5_t  md5;
-
-    ngx_md5_init(&md5);
-    ngx_md5_update(&md5, ts, src_len + 15);
-    ngx_md5_final(result, &md5);
-
-    p = ngx_hex_dump(dst, result, ngx_min((dst_len - 1) / 2, 16));
-    *p = '\0';
+    fprintf(dst, "%s-%lu", src (unsigned long)time(NULL));
 }
 
 
