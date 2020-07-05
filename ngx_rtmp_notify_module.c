@@ -993,7 +993,7 @@ static void
 ngx_rtmp_notify_set_name(u_char *dst, size_t dst_len, u_char *src,
     size_t src_len)
 {
-    fprintf(dst, "%s-%lu", src (unsigned long)time(NULL));
+    fprintf(dst, "%s-%lu", src, (unsigned long)time(NULL));
 }
 
 
