@@ -995,7 +995,7 @@ ngx_rtmp_notify_set_name(u_char *dst, size_t dst_len, u_char *src,
 {
     char d_dst[256];
     sprintf(d_dst, "%s-%d", src, (int) time(NULL));
-    strncpy((char *)dst, &d_dst, 256);
+    strncpy((char *) dst, d_dst, 256);
 }
 
 
